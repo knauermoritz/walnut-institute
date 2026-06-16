@@ -278,6 +278,101 @@ body.dots-active .si { transform:scale(0.91); }
 .sdots.inv .dot-pip { border-color:rgba(255,255,255,0.45); }
 .sdots.inv .sdot.on .dot-pip { background:#fff; border-color:#fff; }
 .sdots.inv .dot-lbl { color:#fff; }
+
+/* ── MOBILE ─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+
+  /* Hide custom cursor on touch */
+  #cur { display:none; }
+  * { cursor:auto !important; }
+
+  /* Slides grow to content */
+  .slide { height:auto; min-height:100svh; overflow:visible; }
+  .si    { height:auto; min-height:100svh; }
+
+  /* Remove vertical center dividers */
+  .slide-hero::before,
+  .feat-split::before { display:none; }
+
+  /* Unified flat backgrounds */
+  .slide-hero,
+  .feat-split:not(.flip),
+  .feat-split.flip { background:var(--bg); }
+
+  /* Fixed header — smaller, tighter */
+  .sdots { display:none; }
+  .ui-logo  { top:22px; left:24px; font-size:13px; }
+  .ui-contact { top:16px; right:20px; padding:8px 16px; font-size:10px; letter-spacing:0.08em; }
+
+  /* ── HERO ── */
+  .slide-hero .si { grid-template-columns:1fr; }
+  .hero-l {
+    background:var(--bg);
+    padding:96px 28px 32px;
+    gap:18px;
+    justify-content:flex-end;
+  }
+  .hero-h { font-size:clamp(54px,16vw,80px); }
+  .hero-r {
+    background:var(--bg);
+    padding:24px 28px 52px;
+    justify-content:flex-start;
+    align-items:flex-start;
+  }
+  .ipad { max-width:100%; }
+
+  /* ── FEATURE SPLITS ── */
+  .feat-split .si       { grid-template-columns:1fr; }
+  .feat-split.flip .si  { direction:ltr; }
+  .feat-split.flip .si > * { direction:ltr; }
+  .feat-l {
+    background:var(--bg) !important;
+    padding:96px 28px 32px !important;
+    gap:16px;
+    justify-content:flex-end;
+  }
+  .feat-r {
+    background:var(--bg) !important;
+    padding:24px 28px 52px;
+    justify-content:flex-start;
+    align-items:flex-start;
+  }
+  .feat-h { font-size:clamp(44px,13vw,68px); }
+
+  /* ── CASES ── */
+  .slide-cases .si { padding:80px 28px 52px; gap:28px; }
+  .cases-h { font-size:clamp(28px,8vw,40px); }
+  .cases-grid { grid-template-columns:1fr; border-top:none; }
+  .case-col {
+    border-right:none;
+    padding:28px 0 0;
+    border-top:1px solid rgba(10,10,10,0.12);
+  }
+  .case-col:first-child { border-top:none; padding-top:0; }
+  .case-col + .case-col { padding-left:0; }
+  .case-mipad { max-width:min(320px,75vw); }
+
+  /* ── STATEMENT ── */
+  .slide-stmt .si { padding:0 28px; }
+  .stmt-h { font-size:clamp(26px,7vw,44px); }
+
+  /* ── VISION ── */
+  .slide-vision .si { padding:80px 28px 60px; gap:28px; }
+  .vision-text p { font-size:14px; line-height:1.7; }
+
+  /* ── ROADMAP — vertical ── */
+  .slide-road .si { padding:80px 28px 60px; gap:40px; }
+  .road-steps { flex-direction:column; gap:24px; }
+  .road-steps::before { display:none; }
+  .road-step { flex:none; padding-top:0; padding-left:28px; padding-right:0; }
+  .road-dot { top:2px; }
+  .road-dot.now { top:0; }
+
+  /* ── CONTACT ── */
+  .slide-contact .si { padding:0 28px; }
+  .contact-h { font-size:clamp(48px,15vw,100px); }
+  .contact-sub { font-size:13px; }
+}
 </style>
 </head>
 <body>
