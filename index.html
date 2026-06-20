@@ -23,7 +23,7 @@ html, body {
   background:var(--bg);
 }
 
-/* CUSTOM CURSOR — inverted + grayscale via backdrop-filter */
+/* CUSTOM CURSOR */
 #cur {
   position:fixed; z-index:99999; pointer-events:none;
   width:18px; height:18px; border-radius:50%;
@@ -48,14 +48,13 @@ html, body {
 #sc::-webkit-scrollbar { display:none; }
 #sc { scrollbar-width:none; }
 
-/* SLIDE — just the scroll snap frame, no layout */
+/* SLIDE */
 .slide {
   height:100vh; scroll-snap-align:start;
   position:relative; overflow:hidden;
   background:var(--bg); color:var(--ink);
 }
 
-/* Horizontal separator — only visible while scrolling */
 .slide-sep::after {
   content:'';
   position:absolute; bottom:0; left:0; right:0;
@@ -65,7 +64,7 @@ html, body {
 }
 #sc.is-scrolling .slide-sep::after { opacity:0.13; }
 
-/* INNER WRAPPER — gets the scale transform, no white border */
+/* INNER WRAPPER */
 .si {
   width:100%; height:100%; display:flex;
   transition:transform 0.42s cubic-bezier(.25,.46,.45,.94);
@@ -73,12 +72,12 @@ html, body {
 }
 body.dots-active .si { transform:scale(0.91); }
 
-/* Match slide backgrounds to column colors — eliminates visible zoom border */
-.slide-hero         { background: linear-gradient(to right, var(--bg) 50%, var(--bg2) 50%); }
-.feat-split:not(.flip) { background: linear-gradient(to right, var(--bg2) 50%, var(--bg) 50%); }
-.feat-split.flip    { background: linear-gradient(to right, var(--bg) 50%, var(--bg2) 50%); }
+/* Split backgrounds */
+.slide-hero           { background: linear-gradient(to right, var(--bg) 50%, var(--bg2) 50%); }
+.feat-split:not(.flip){ background: linear-gradient(to right, var(--bg) 50%, var(--bg2) 50%); }
+.feat-split.flip      { background: linear-gradient(to right, var(--bg2) 50%, var(--bg) 50%); }
 
-/* Vertical divider — outside .si so it stays full-height during scale */
+/* Vertical divider */
 .slide-hero::before,
 .feat-split::before {
   content:'';
@@ -88,13 +87,12 @@ body.dots-active .si { transform:scale(0.91); }
   transform:translateX(-50%);
 }
 
-/* HERO layout */
+/* HERO */
 .slide-hero .si { display:grid; grid-template-columns:1fr 1fr; }
-
 .hero-l {
   background:var(--bg);
-  padding:0 52px;
-  display:flex; flex-direction:column; justify-content:center; gap:40px;
+  padding:0 52px 0 84px;
+  display:flex; flex-direction:column; justify-content:center; gap:24px;
 }
 .hero-r {
   background:var(--bg2);
@@ -102,17 +100,16 @@ body.dots-active .si { transform:scale(0.91); }
   padding:60px 48px; overflow:hidden;
 }
 .tag { font-size:11px; font-weight:400; letter-spacing:0.13em; text-transform:uppercase; color:var(--blue); }
-.hero-h { font-size:clamp(72px,9.5vw,148px); font-weight:800; line-height:0.88; letter-spacing:-0.04em; }
-.hero-h em { font-style:normal; color:var(--blue); }
-.hero-sub { font-size:15px; font-weight:300; color:var(--muted); }
+.hero-h { font-size:clamp(54px,5.8vw,84px); font-weight:800; line-height:0.9; letter-spacing:-0.04em; hyphens:none; word-break:keep-all; }
+.hero-h em { font-style:normal; color:var(--blue); display:block; margin-top:0.05em; }
+.hero-sub { font-size:15px; font-weight:300; color:var(--muted); max-width:360px; line-height:1.6; }
 
-/* FEATURE SPLIT layout */
+/* FEATURE SPLIT */
 .feat-split .si { display:grid; grid-template-columns:1fr 1fr; }
 .feat-split.flip .si { direction:rtl; }
 .feat-split.flip .si > * { direction:ltr; }
-
 .feat-l {
-  padding:0 52px;
+  padding:0 52px 0 84px;
   display:flex; flex-direction:column; justify-content:center; gap:32px;
 }
 .feat-r {
@@ -123,117 +120,93 @@ body.dots-active .si { transform:scale(0.91); }
 .feat-h { font-size:clamp(52px,6vw,88px); font-weight:700; line-height:0.92; letter-spacing:-0.038em; }
 .feat-sub { font-size:15px; font-weight:300; color:var(--muted); line-height:1.65; max-width:360px; }
 
-/* IPAD */
+/* IPAD FRAME */
 .ipad {
   background:#1C1C1E; border-radius:22px; padding:13px;
   box-shadow:0 32px 72px rgba(0,0,0,0.22);
   width:100%; max-width:min(520px,38vw); flex-shrink:0;
 }
-.ipad-s {
-  background:#fff; border-radius:10px; overflow:hidden;
-}
-.ipad-s img {
-  width:100%; height:auto; display:block; border-radius:10px;
-}
+.ipad-s { background:#fff; border-radius:10px; overflow:hidden; }
+.ipad-s img  { width:100%; height:auto; display:block; border-radius:10px; }
+.ipad-s video{ width:100%; height:auto; display:block; border-radius:10px; }
 
-
-/* USE CASES */
-.slide-cases { background:var(--bg2); }
-.slide-cases .si {
-  flex-direction:column; justify-content:center;
-  padding:0 72px; gap:52px;
-}
-.cases-top { display:flex; align-items:baseline; justify-content:space-between; }
-.cases-lbl { font-size:10px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); }
-.cases-h { font-size:clamp(36px,4vw,58px); font-weight:700; letter-spacing:-0.03em; line-height:1; }
-.cases-grid {
-  display:grid; grid-template-columns:repeat(3,1fr);
+/* VORTEILE */
+.slide-vorteile { background:var(--bg2); }
+.slide-vorteile .si { flex-direction:column; justify-content:center; padding:0 84px; gap:48px; }
+.vort-top { display:flex; align-items:baseline; justify-content:space-between; }
+.vort-lbl { font-size:10px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); }
+.vort-h { font-size:clamp(36px,4vw,58px); font-weight:700; letter-spacing:-0.03em; line-height:1; }
+.vort-list {
+  list-style:none; display:flex; flex-direction:column;
   border-top:1px solid rgba(10,10,10,0.13);
 }
-.case-col {
-  padding:36px 44px 0 0;
-  border-right:1px solid rgba(10,10,10,0.13);
-  display:flex; flex-direction:column; gap:18px;
+.vort-list li {
+  display:grid; grid-template-columns:220px 1fr;
+  gap:0 40px; align-items:baseline;
+  padding:20px 0;
+  border-bottom:1px solid rgba(10,10,10,0.13);
+  font-size:15px; line-height:1.5;
 }
-.case-col:last-child { border-right:none; padding-right:0; }
-.case-col:first-child { padding-left:0; }
-.case-col + .case-col { padding-left:44px; }
-.case-num {
-  font-size:11px; font-weight:600; letter-spacing:0.1em;
-  color:var(--muted); text-transform:uppercase;
+.vort-list strong { font-weight:700; letter-spacing:-0.01em; }
+.vort-list span { font-weight:300; color:var(--muted); }
+
+/* TEAM */
+.slide-team { background:var(--bg2); }
+.slide-team .si {
+  display:grid; grid-template-columns:1fr 1fr;
+  height:100%;
 }
-.case-mipad {
-  background:#1C1C1E; border-radius:14px; padding:8px;
-  width:100%; max-width:260px;
-  box-shadow:0 18px 48px rgba(0,0,0,0.18);
+.slide-team::before {
+  content:''; position:absolute; left:50%; top:0; bottom:0;
+  width:1px; background:var(--ink); opacity:0.13; z-index:10;
 }
-.case-screen {
-  background:#fff; border-radius:7px; overflow:hidden;
+.team-member {
+  padding:0 64px 0 84px;
+  display:flex; flex-direction:column; justify-content:center; gap:0;
 }
-.case-screen img {
-  width:100%; height:auto; display:block; border-radius:7px;
+.team-member:first-child { border-right:none; }
+.team-avatar {
+  width:52px; height:52px; border-radius:50%;
+  background:rgba(10,10,10,0.08);
+  margin-bottom:28px;
 }
-.case-title { font-size:18px; font-weight:700; letter-spacing:-0.02em; }
-.case-desc { font-size:12px; font-weight:300; color:var(--muted); line-height:1.65; }
+.team-name { font-size:clamp(28px,3vw,42px); font-weight:700; letter-spacing:-0.03em; line-height:1; margin-bottom:10px; }
+.team-role { font-size:10px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--blue); margin-bottom:20px; }
+.team-bio { font-size:14px; font-weight:300; color:var(--muted); line-height:1.75; max-width:360px; }
+.team-lbl { display:none; }
+.team-h   { display:none; }
 
 /* VISION */
 .slide-vision { background:var(--ink); }
-.slide-vision .si { flex-direction:column; justify-content:center; padding:0 80px; gap:40px; }
+.slide-vision .si { flex-direction:column; justify-content:center; padding:0 84px; gap:40px; }
 .vision-lbl { font-size:10px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.3); }
 .vision-text { max-width:700px; display:flex; flex-direction:column; gap:22px; }
 .vision-text p { font-size:15px; font-weight:300; line-height:1.8; color:rgba(255,255,255,0.78); }
 .vision-sig { font-size:12px; font-weight:400; letter-spacing:0.05em; color:rgba(255,255,255,0.25); margin-top:12px; }
-
-/* STATEMENT */
-.slide-stmt { background:var(--ink); }
-.slide-stmt .si { flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:32px; }
-.stmt-lbl { font-size:10px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--blue); }
-.stmt-h { font-size:clamp(32px,4.5vw,68px); font-weight:700; line-height:1.12; letter-spacing:-0.03em; max-width:760px; color:#F5F5F4; }
-.stmt-h em { font-style:normal; color:rgba(245,245,244,0.22); }
-
-/* ROADMAP */
-.slide-road .si { flex-direction:column; justify-content:center; padding:0 80px; gap:64px; }
-.road-lbl { font-size:10px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); }
-.road-steps { display:flex; position:relative; }
-.road-steps::before {
-  content:''; position:absolute;
-  top:7px; left:7px; right:7px; height:1px;
-  background:var(--ink); opacity:0.12;
-}
-.road-step { flex:1; padding-top:28px; padding-right:20px; position:relative; }
-.road-dot {
-  position:absolute; top:0; left:0;
-  width:15px; height:15px; border-radius:50%;
-  border:1px solid rgba(10,10,10,0.22); background:var(--bg); z-index:1;
-}
-.road-dot.done { background:var(--ink); border-color:var(--ink); }
-.road-dot.now  {
-  background:var(--blue); border-color:var(--blue);
-  width:19px; height:19px; top:-2px; left:-2px;
-  box-shadow:0 0 0 4px rgba(20,0,255,0.12);
-}
-.road-now-tag { font-size:9px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--blue); margin-bottom:4px; }
-.road-name { font-size:16px; font-weight:600; letter-spacing:-0.01em; margin-bottom:6px; }
-.road-desc { font-size:12px; font-weight:300; color:var(--muted); line-height:1.5; }
 
 /* KONTAKT */
 .slide-contact { background:var(--blue); }
 .slide-contact .si { flex-direction:column; align-items:center; justify-content:center; gap:36px; text-align:center; }
 .contact-sub { font-size:15px; font-weight:300; color:rgba(255,255,255,0.6); }
 .contact-h { font-size:clamp(72px,12vw,160px); font-weight:800; line-height:0.88; letter-spacing:-0.04em; color:#fff; }
+.contact-ctas { display:flex; gap:16px; flex-wrap:wrap; justify-content:center; }
 .contact-cta {
   display:inline-block;
   font-size:11px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase;
   text-decoration:none; color:var(--blue); background:#fff;
   padding:15px 40px; transition:opacity 0.15s;
 }
-.contact-cta:hover { opacity:0.88; }
+.contact-cta.outline {
+  background:transparent; color:#fff;
+  border:1px solid rgba(255,255,255,0.5);
+}
+.contact-cta:hover { opacity:0.82; }
 
 /* FIXED UI */
 #ui { position:fixed; inset:0; pointer-events:none; z-index:900; }
 
 .ui-logo {
-  position:absolute; top:32px; left:48px;
+  position:absolute; top:32px; left:68px;
   font-size:15px; font-weight:700; letter-spacing:-0.02em;
   pointer-events:all; transition:color 0.3s; color:var(--ink);
   display:flex; align-items:center; gap:6px;
@@ -253,7 +226,7 @@ body.dots-active .si { transform:scale(0.91); }
 .ui-contact.inv { border-color:rgba(255,255,255,0.45); color:#fff; }
 .ui-contact.inv:hover { background:rgba(255,255,255,0.12); }
 
-/* DOTS — left side with label hover */
+/* DOTS */
 .sdots {
   position:absolute; left:28px; top:50%;
   transform:translateY(-50%);
@@ -284,103 +257,53 @@ body.dots-active .si { transform:scale(0.91); }
 
 /* ── MOBILE ─────────────────────────────────────────────── */
 @media (max-width: 768px) {
-
-  /* Hide custom cursor on touch */
   #cur { display:none; }
   * { cursor:auto !important; }
 
-  /* Slides grow to content */
   .slide { height:auto; min-height:100svh; overflow:visible; }
   .si    { height:auto; min-height:100svh; }
 
-  /* Remove vertical center dividers */
   .slide-hero::before,
   .feat-split::before { display:none; }
 
-  /* Unified flat backgrounds */
   .slide-hero,
   .feat-split:not(.flip),
   .feat-split.flip { background:var(--bg); }
 
-  /* Fixed header — smaller, tighter */
   .sdots { display:none; }
   .ui-logo  { top:22px; left:24px; font-size:13px; }
   .ui-contact { top:16px; right:20px; padding:8px 16px; font-size:10px; letter-spacing:0.08em; }
 
-  /* ── HERO ── */
   .slide-hero .si { grid-template-columns:1fr; }
-  .hero-l {
-    background:var(--bg);
-    padding:96px 28px 32px;
-    gap:18px;
-    justify-content:flex-end;
-  }
-  .hero-h { font-size:clamp(54px,16vw,80px); }
-  .hero-r {
-    background:var(--bg);
-    padding:24px 28px 52px;
-    justify-content:flex-start;
-    align-items:flex-start;
-  }
+  .hero-l { background:var(--bg); padding:96px 28px 32px; gap:18px; justify-content:flex-end; }
+  .hero-h { font-size:clamp(36px,10vw,56px); }
+  .hero-r { background:var(--bg); padding:24px 28px 52px; justify-content:flex-start; align-items:flex-start; }
   .ipad { max-width:100%; }
 
-  /* ── FEATURE SPLITS ── */
-  .feat-split .si       { grid-template-columns:1fr; }
-  .feat-split.flip .si  { direction:ltr; }
+  .feat-split .si      { grid-template-columns:1fr; }
+  .feat-split.flip .si { direction:ltr; }
   .feat-split.flip .si > * { direction:ltr; }
-  .feat-l {
-    background:var(--bg) !important;
-    padding:96px 28px 32px !important;
-    gap:16px;
-    justify-content:flex-end;
-  }
-  .feat-r {
-    background:var(--bg) !important;
-    padding:24px 28px 52px;
-    justify-content:flex-start;
-    align-items:flex-start;
-  }
+  .feat-l { background:var(--bg) !important; padding:96px 28px 32px !important; gap:16px; justify-content:flex-end; }
+  .feat-r { background:var(--bg2) !important; padding:24px 28px 52px; justify-content:flex-start; align-items:flex-start; }
   .feat-h { font-size:clamp(44px,13vw,68px); }
 
-  /* ── CASES ── */
-  .slide-cases .si { padding:80px 28px 52px; gap:28px; }
-  .cases-h { font-size:clamp(28px,8vw,40px); }
-  .cases-grid { grid-template-columns:1fr; border-top:none; }
-  .case-col {
-    border-right:none;
-    padding:28px 0 0;
-    border-top:1px solid rgba(10,10,10,0.12);
-  }
-  .case-col:first-child { border-top:none; padding-top:0; }
-  .case-col + .case-col { padding-left:0; }
-  .case-mipad { max-width:min(320px,75vw); }
+  .slide-vorteile .si { padding:80px 28px 52px; gap:32px; }
+  .vort-list li { grid-template-columns:1fr; gap:4px; padding:18px 0; }
+  .vort-list span { display:block; }
+  .vort-h { font-size:clamp(28px,8vw,40px); }
 
-  /* ── STATEMENT ── */
-  .slide-stmt .si { padding:0 28px; }
-  .stmt-h { font-size:clamp(26px,7vw,44px); }
-
-  /* ── VISION ── */
   .slide-vision .si { padding:80px 28px 60px; gap:28px; }
   .vision-text p { font-size:14px; line-height:1.7; }
 
-  /* ── ROADMAP — vertical ── */
-  .slide-road .si { padding:80px 28px 60px; gap:40px; }
-  .road-steps { flex-direction:column; gap:24px; }
-  .road-steps::before { display:none; }
-  .road-step { flex:none; padding-top:0; padding-left:28px; padding-right:0; }
-  .road-dot { top:2px; }
-  .road-dot.now { top:0; }
-
-  /* ── CONTACT ── */
   .slide-contact .si { padding:0 28px; }
   .contact-h { font-size:clamp(48px,15vw,100px); }
   .contact-sub { font-size:13px; }
+  .contact-ctas { flex-direction:column; align-items:center; }
 }
 </style>
 </head>
 <body>
 
-<!-- CUSTOM CURSOR -->
 <div id="cur"></div>
 
 <!-- FIXED UI -->
@@ -394,63 +317,44 @@ body.dots-active .si { transform:scale(0.91); }
   <a href="mailto:moritz.knauer09@gmail.com?subject=Walnut%20Anfrage" class="ui-contact" id="ctabtn">Kontakt</a>
   <nav class="sdots" id="sdots">
     <div class="sdot on" data-i="0"><div class="dot-pip"></div><span class="dot-lbl">Start</span></div>
-    <div class="sdot"    data-i="1"><div class="dot-pip"></div><span class="dot-lbl">Compass</span></div>
-    <div class="sdot"    data-i="2"><div class="dot-pip"></div><span class="dot-lbl">Walnut</span></div>
-    <div class="sdot"    data-i="3"><div class="dot-pip"></div><span class="dot-lbl">Wie es funktioniert</span></div>
-    <div class="sdot"    data-i="4"><div class="dot-pip"></div><span class="dot-lbl">Konzept</span></div>
-    <div class="sdot"    data-i="5"><div class="dot-pip"></div><span class="dot-lbl">Vision</span></div>
-    <div class="sdot"    data-i="6"><div class="dot-pip"></div><span class="dot-lbl">Roadmap</span></div>
-    <div class="sdot"    data-i="7"><div class="dot-pip"></div><span class="dot-lbl">Kontakt</span></div>
+    <div class="sdot"    data-i="1"><div class="dot-pip"></div><span class="dot-lbl">Walnut</span></div>
+    <div class="sdot"    data-i="2"><div class="dot-pip"></div><span class="dot-lbl">Compass</span></div>
+    <div class="sdot"    data-i="3"><div class="dot-pip"></div><span class="dot-lbl">Vorteile</span></div>
+    <div class="sdot"    data-i="4"><div class="dot-pip"></div><span class="dot-lbl">Vision</span></div>
+    <div class="sdot"    data-i="5"><div class="dot-pip"></div><span class="dot-lbl">Kontakt</span></div>
   </nav>
 </div>
 
 <div id="sc">
 
-<!-- SLIDE 0: HERO — links hell / rechts dunkel (AB) -->
+<!-- SLIDE 0: HERO -->
 <section class="slide slide-hero slide-sep">
   <div class="si">
     <div class="hero-l">
-      <div class="tag">iPad · Schulen · 2026</div>
-      <h1 class="hero-h">Kein<br>Papier.<br><em>Mehr.</em></h1>
-      <p class="hero-sub">Compass &amp; Walnut. Unterricht auf dem iPad.</p>
+      <h1 class="hero-h">Schule.<em>Digitalisieren.</em></h1>
+      <p class="hero-sub">Walnut digitalisiert den Unterricht: Aufgaben, Notizen, Korrekturen und mehr, alles auf einem Gerät.</p>
     </div>
     <div class="hero-r">
       <div class="ipad">
         <div class="ipad-s">
-          <img src="ss-hero.png" alt="Walnut App">
+          <video autoplay muted loop playsinline>
+            <source src="demo-cropped.mp4" type="video/mp4">
+          </video>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SLIDE 1: EDUTEACH — links dunkel / rechts hell (BA) -->
-<section class="slide feat-split slide-sep">
-  <div class="si">
-    <div class="feat-l" style="background:var(--bg2);">
-      <div class="feat-lbl">Die Lehrer-App</div>
-      <h2 class="feat-h">Compass.</h2>
-      <p class="feat-sub">Kurse erstellen, Aufgaben veröffentlichen, Abgaben korrigieren.</p>
-    </div>
-    <div class="feat-r" style="background:var(--bg);">
-      <div class="ipad">
-        <div class="ipad-s">
-          <img src="ss-compass.png" alt="Compass App">
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SLIDE 2: EDUFLOW — visuell links hell / rechts dunkel (AB) via flip -->
+<!-- SLIDE 1: WALNUT (Schüler) -->
 <section class="slide feat-split flip slide-sep">
   <div class="si">
-    <div class="feat-l" style="background:var(--bg2);">
-      <div class="feat-lbl">Die Schüler-App</div>
-      <h2 class="feat-h">Walnut.</h2>
-      <p class="feat-sub">Aufgaben bearbeiten, einreichen und Korrekturen einsehen.</p>
+    <div class="feat-l" style="background:var(--bg);">
+      <div class="feat-lbl">Schüler-App</div>
+      <h2 class="feat-h">Alle Fächer.<br>Eine App.</h2>
+      <p class="feat-sub">Aufgaben bearbeiten, Texte lesen, Korrekturen einsehen: alles in einer App.</p>
     </div>
-    <div class="feat-r" style="background:var(--bg);">
+    <div class="feat-r" style="background:var(--bg2);">
       <div class="ipad">
         <div class="ipad-s">
           <img src="ss-walnut.png" alt="Walnut App">
@@ -460,96 +364,60 @@ body.dots-active .si { transform:scale(0.91); }
   </div>
 </section>
 
-<!-- SLIDE 3: USE CASES -->
-<section class="slide slide-cases">
+<!-- SLIDE 2: COMPASS (Lehrer) -->
+<section class="slide feat-split slide-sep">
   <div class="si">
-    <div class="cases-top">
-      <p class="cases-lbl">Wie es funktioniert</p>
-      <h2 class="cases-h">Drei Schritte.</h2>
+    <div class="feat-l" style="background:var(--bg);">
+      <div class="feat-lbl">Compass: Für Lehrer</div>
+      <h2 class="feat-h">Deine Klasse.<br>Immer im Blick.</h2>
+      <p class="feat-sub">Aufgaben erstellen, Abgaben einsehen, Feedback geben: alles an einem Ort. Lehrer sehen den individuellen Lernstand jedes Schülers.</p>
     </div>
-    <div class="cases-grid">
-
-      <!-- 01 Aufgabe stellen -->
-      <div class="case-col">
-        <div class="case-num">01 Aufgabe stellen</div>
-        <div class="case-mipad">
-          <div class="case-screen">
-            <img src="ss-case1.png" alt="Compass Kurse">
-          </div>
+    <div class="feat-r" style="background:var(--bg2);">
+      <div class="ipad">
+        <div class="ipad-s">
+          <img src="ss-compass.png" alt="Compass App">
         </div>
-        <div class="case-title">Aufgabe stellen</div>
-        <div class="case-desc">Lehrer erstellen und veröffentlichen Aufgaben direkt in Compass, mit Frist, Kurs und Punktzahl.</div>
       </div>
-
-      <!-- 02 Einreichen -->
-      <div class="case-col">
-        <div class="case-num">02 Einreichen</div>
-        <div class="case-mipad">
-          <div class="case-screen">
-            <img src="ss-case2.png" alt="Walnut Aufgabe">
-          </div>
-        </div>
-        <div class="case-title">Einreichen</div>
-        <div class="case-desc">Schüler bearbeiten Aufgaben in Walnut und reichen mit einem Tippen ein, ohne Papier, ohne Umwege.</div>
-      </div>
-
-      <!-- 03 Feedback -->
-      <div class="case-col">
-        <div class="case-num">03 Feedback</div>
-        <div class="case-mipad">
-          <div class="case-screen">
-            <img src="ss-case3.png" alt="Compass Korrektur">
-          </div>
-        </div>
-        <div class="case-title">Feedback</div>
-        <div class="case-desc">Lehrer korrigieren direkt in Compass. Schüler erhalten Note und Kommentar sofort in Walnut.</div>
-      </div>
-
     </div>
   </div>
 </section>
 
-<!-- SLIDE 4: STATEMENT -->
-<section class="slide slide-stmt">
+<!-- SLIDE 3: VORTEILE -->
+<section class="slide slide-vorteile slide-sep">
   <div class="si">
-    <p class="stmt-lbl">Das Konzept</p>
-    <h2 class="stmt-h">Aufgabe stellen.<br>Einreichen. Korrigieren.<br><em>Fertig.</em></h2>
+    <div class="vort-top">
+      <p class="vort-lbl">Warum Walnut</p>
+      <h2 class="vort-h">Was es löst.</h2>
+    </div>
+    <ul class="vort-list">
+      <li><strong>KI Kontrolle</strong><span>Lehrer sehen transparent, wann und wo Schüler Aufgaben mit KI erledigt haben.</span></li>
+      <li><strong>Keine Ablenkungen</strong><span>Kein Social Media, keine Spiele, kein Browser. Walnut ist ausschließlich für den Unterricht gebaut.</span></li>
+      <li><strong>Ein Gerät statt allem</strong><span>Keine Bücher, keine Hefte, keine losen Zettel. Alles digital auf einem iPad.</span></li>
+      <li><strong>Sicher &amp; DSGVO-konform</strong><span>Server in der EU. Kein Tracking, keine Werbung. Daten gehören der Schule.</span></li>
+    </ul>
   </div>
 </section>
 
-<!-- SLIDE 5: VISION -->
-<section class="slide slide-vision">
+<!-- SLIDE 4: VISION -->
+<section class="slide slide-vision slide-sep">
   <div class="si">
     <p class="vision-lbl">Vision</p>
     <div class="vision-text">
       <p>Schule bereitet Schülerinnen und Schüler auf das Leben vor. Vielen macht sie Spaß, doch eines bereitet fast allen gleichermaßen wenig Freude: das Organisatorische. Papierkram, Klausurtermine, Hefte, Hausaufgaben. Der administrative Aufwand kostet Zeit, die eigentlich dem Lernen gehören sollte. In der Privatwirtschaft ist dieses Problem längst gelöst: Informationen digital zu erfassen, zu verwalten und weiterzugeben ist schneller, einfacher und zuverlässiger als jede analoge Alternative. Schulen hinken dieser Entwicklung hinterher.</p>
-      <p>Viele Oberstufenschüler versuchen, diese Lücke selbst zu schließen, mit privaten Tablets. Doch das bringt neue Probleme: unkontrollierter KI-Einsatz, Ablenkung durch Social Media und Spiele. Ohne einheitlichen Rahmen bleibt der Einsatz von Technologie im Unterricht unstrukturiert und unberechenbar. Genau hier setzt Walnut an: eine einheitliche Software, die Lehrkräfte und Schüler gemeinsam nutzen, einfach, klar und ohne Ablenkung. Dabei werden Lehrkräfte nicht ersetzt, sondern entlastet. Sie behalten jederzeit den Überblick über den Lernstand jedes einzelnen Schülers und können gezielt dort unterstützen, wo es nötig ist. Wer schneller vorankommt, wird nicht ausgebremst. Wer Schwierigkeiten hat, erhält gezielte Hilfe.</p>
-      <p>Die Vision geht weiter. Walnut soll langfristig zu einer Art TikTok des Lernens werden, im besten Sinne. Ein Algorithmus, der versteht, welche Inhalte und Aufgaben für jeden Schüler gerade am wirkungsvollsten sind. Lernpsychologische Mechanismen, die soziale Medien so wirksam machen, werden genutzt, um Lernen interessanter und effizienter zu gestalten. Jede Schülerin und jeder Schüler erhält ein individuell angepasstes Curriculum, maßgeschneidert auf eigene Stärken, Schwächen und Lerngeschwindigkeit. Da eine solche Transformation tiefgreifende Veränderungen im Schulsystem erfordert, beginnt Walnut dort, wo Veränderung heute schon möglich ist, im bestehenden System, Schritt für Schritt.</p>
+      <p>Viele Oberstufenschüler versuchen, diese Lücke selbst zu schließen, mit privaten Tablets. Doch das bringt neue Probleme: unkontrollierter KI-Einsatz, Ablenkung durch Social Media und Spiele. Ohne einheitlichen Rahmen bleibt der Einsatz von Technologie im Unterricht unstrukturiert und unberechenbar. Genau hier setzt Walnut an: eine einheitliche Software, die Lehrkräfte und Schüler gemeinsam nutzen, einfach, klar und ohne Ablenkung. Dabei werden Lehrkräfte nicht ersetzt, sondern entlastet. Sie behalten jederzeit den Überblick über den Lernstand jedes einzelnen Schülers und können gezielt dort unterstützen, wo es nötig ist.</p>
+      <p>Die Vision geht weiter. Moritz Knauer, Gründer von Walnut Institute, möchte langfristig einen Algorithmus schaffen, der versteht, welche Inhalte und Aufgaben für jeden Schüler gerade am wirkungsvollsten sind. Jede Schülerin und jeder Schüler erhält ein individuell angepasstes Curriculum, maßgeschneidert auf eigene Stärken, Schwächen und Lerngeschwindigkeit.</p>
     </div>
     <p class="vision-sig">Moritz Knauer</p>
   </div>
 </section>
 
-<!-- SLIDE 6: ROADMAP -->
-<section class="slide slide-road">
-  <div class="si">
-    <p class="road-lbl">Unsere Roadmap</p>
-    <div class="road-steps">
-      <div class="road-step"><div class="road-dot done"></div><div class="road-name">Konzept</div><div class="road-desc">Idee, Marktanalyse<br>und Produktvision</div></div>
-      <div class="road-step"><div class="road-dot done"></div><div class="road-name">Entwicklung</div><div class="road-desc">Backend, iOS-Apps,<br>Echtzeit-Infrastruktur</div></div>
-      <div class="road-step"><div class="road-dot now"></div><div class="road-now-tag">Jetzt</div><div class="road-name">Prototyp</div><div class="road-desc">Vollständig funktionsfähig,<br>bereit für erste Partner</div></div>
-      <div class="road-step"><div class="road-dot"></div><div class="road-name">Investoren &amp; Partner</div><div class="road-desc">Kapital sichern, erste<br>Schulen gewinnen</div></div>
-      <div class="road-step"><div class="road-dot"></div><div class="road-name">Launch</div><div class="road-desc">Vollständige Plattform,<br>Skalierung &amp; Wachstum</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- SLIDE 5: KONTAKT -->
+<!-- SLIDE 6: KONTAKT -->
 <section class="slide slide-contact">
   <div class="si">
-    <p class="contact-sub">Wir suchen Pilotschulen und Investoren.</p>
     <h2 class="contact-h">Interesse?</h2>
-    <a class="contact-cta" href="mailto:moritz.knauer09@gmail.com?subject=Walnut%20Anfrage">Kontakt aufnehmen</a>
+    <div class="contact-ctas">
+      <a class="contact-cta" href="mailto:moritz.knauer09@gmail.com?subject=Walnut%20Anfrage">Kontakt</a>
+    </div>
   </div>
 </section>
 
@@ -561,8 +429,8 @@ const dots    = document.querySelectorAll('.sdot');
 const logo    = document.getElementById('logo');
 const ctabtn  = document.getElementById('ctabtn');
 const sdotsEl = document.getElementById('sdots');
-const DARK    = new Set([4, 5, 7]);
-const N       = 8;
+const DARK    = new Set([4, 5]);
+const N       = 6;
 
 let scrollEndTimer;
 
@@ -586,6 +454,15 @@ sc.addEventListener('scroll', () => {
 
 dots.forEach(d => d.addEventListener('click', () => goTo(parseInt(d.dataset.i))));
 
+document.addEventListener('keydown', e => {
+  const i = currentIdx();
+  if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') {
+    e.preventDefault(); goTo(Math.min(i + 1, N - 1));
+  } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+    e.preventDefault(); goTo(Math.max(i - 1, 0));
+  }
+});
+
 sdotsEl.addEventListener('mouseenter', () => document.body.classList.add('dots-active'));
 sdotsEl.addEventListener('mouseleave', () => document.body.classList.remove('dots-active'));
 
@@ -593,9 +470,7 @@ updateUI();
 
 // Custom cursor
 const cur = document.getElementById('cur');
-const BIG = new Set(['A','BUTTON']);
 let raf;
-
 window.addEventListener('mousemove', e => {
   cancelAnimationFrame(raf);
   raf = requestAnimationFrame(() => {
@@ -603,7 +478,6 @@ window.addEventListener('mousemove', e => {
     cur.style.top  = e.clientY + 'px';
   });
 });
-
 document.addEventListener('mouseover', e => {
   const el = e.target.closest('a, button, .sdot');
   cur.classList.toggle('big', !!el);
