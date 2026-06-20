@@ -337,7 +337,7 @@ body.dots-active .si { transform:scale(0.91); }
     <div class="hero-r">
       <div class="ipad">
         <div class="ipad-s">
-          <video autoplay muted loop playsinline>
+          <video autoplay muted loop playsinline webkit-playsinline id="herovid">
             <source src="demo-cropped.mp4" type="video/mp4">
           </video>
         </div>
@@ -465,6 +465,14 @@ sdotsEl.addEventListener('mouseenter', () => document.body.classList.add('dots-a
 sdotsEl.addEventListener('mouseleave', () => document.body.classList.remove('dots-active'));
 
 updateUI();
+
+// Video autoplay fallback for mobile
+const vid = document.getElementById('herovid');
+if (vid) {
+  vid.play().catch(() => {
+    document.addEventListener('touchstart', () => vid.play(), { once: true });
+  });
+}
 
 // Custom cursor
 const cur = document.getElementById('cur');
