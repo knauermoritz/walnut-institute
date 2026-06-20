@@ -260,8 +260,11 @@ body.dots-active .si { transform:scale(0.91); }
   #cur { display:none; }
   * { cursor:auto !important; }
 
-  .slide { height:auto; min-height:100svh; overflow:visible; }
-  .si    { height:auto; min-height:100svh; }
+  /* Disable snap on mobile — free scroll */
+  #sc { scroll-snap-type:none; }
+
+  .slide { height:auto; min-height:100svh; overflow:visible; scroll-snap-align:none; }
+  .si    { height:auto; min-height:0; }
 
   .slide-hero::before,
   .feat-split::before { display:none; }
@@ -271,32 +274,41 @@ body.dots-active .si { transform:scale(0.91); }
   .feat-split.flip { background:var(--bg); }
 
   .sdots { display:none; }
-  .ui-logo  { top:22px; left:24px; font-size:13px; }
-  .ui-contact { top:16px; right:20px; padding:8px 16px; font-size:10px; letter-spacing:0.08em; }
+  .ui-logo { top:20px; left:20px; font-size:13px; }
 
+  /* HERO */
   .slide-hero .si { grid-template-columns:1fr; }
-  .hero-l { background:var(--bg); padding:96px 28px 32px; gap:18px; justify-content:flex-end; }
-  .hero-h { font-size:clamp(36px,10vw,56px); }
-  .hero-r { background:var(--bg); padding:24px 28px 52px; justify-content:flex-start; align-items:flex-start; }
-  .ipad { max-width:100%; }
+  .hero-l { background:var(--bg); padding:88px 24px 28px; gap:16px; }
+  .hero-h { font-size:clamp(38px,10vw,56px); }
+  .hero-sub { font-size:14px; max-width:100%; }
+  .hero-r { background:var(--bg2); padding:28px 24px 40px; justify-content:center; }
+  .ipad { max-width:min(100%,380px); }
 
+  /* FEATURE SPLITS */
   .feat-split .si      { grid-template-columns:1fr; }
   .feat-split.flip .si { direction:ltr; }
   .feat-split.flip .si > * { direction:ltr; }
-  .feat-l { background:var(--bg) !important; padding:96px 28px 32px !important; gap:16px; justify-content:flex-end; }
-  .feat-r { background:var(--bg2) !important; padding:24px 28px 52px; justify-content:flex-start; align-items:flex-start; }
-  .feat-h { font-size:clamp(44px,13vw,68px); }
+  .feat-l { background:var(--bg) !important; padding:52px 24px 24px !important; gap:14px; }
+  .feat-r { background:var(--bg2) !important; padding:28px 24px 44px; justify-content:center; }
+  .feat-h { font-size:clamp(36px,11vw,56px); }
+  .feat-sub { font-size:14px; max-width:100%; }
 
-  .slide-vorteile .si { padding:80px 28px 52px; gap:32px; }
-  .vort-list li { grid-template-columns:1fr; gap:4px; padding:18px 0; }
-  .vort-list span { display:block; }
+  /* VORTEILE */
+  .slide-vorteile .si { padding:60px 24px 48px; gap:28px; }
+  .vort-list li { grid-template-columns:1fr; gap:4px; padding:16px 0; }
+  .vort-list span { display:block; font-size:13px; }
   .vort-h { font-size:clamp(28px,8vw,40px); }
 
-  .slide-vision .si { padding:80px 28px 60px; gap:28px; }
-  .vision-text p { font-size:14px; line-height:1.7; }
+  /* VISION — free scroll, compact */
+  .slide-vision { height:auto; }
+  .slide-vision .si { padding:60px 24px 56px; gap:20px; min-height:100svh; }
+  .vision-text { gap:16px; }
+  .vision-text p { font-size:13px; line-height:1.75; }
 
-  .slide-contact .si { padding:0 28px; }
-  .contact-h { font-size:clamp(48px,15vw,100px); }
+  /* KONTAKT */
+  .slide-contact { min-height:100svh; height:auto; }
+  .slide-contact .si { padding:60px 24px; gap:28px; }
+  .contact-h { font-size:clamp(52px,16vw,100px); }
   .contact-sub { font-size:13px; }
   .contact-ctas { flex-direction:column; align-items:center; }
 }
@@ -314,7 +326,6 @@ body.dots-active .si { transform:scale(0.91); }
       <path fill="currentColor" d="M105.650,32.481 A14,14 0 0 0 85,44.801 L85,115.199 A14,14 0 0 0 105.650,127.519 A54,54 0 0 0 105.650,32.481Z"/>
     </svg>Walnut<span> Institute</span>
   </div>
-  <a href="mailto:moritz.knauer09@gmail.com?subject=Walnut%20Anfrage" class="ui-contact" id="ctabtn">Kontakt</a>
   <nav class="sdots" id="sdots">
     <div class="sdot on" data-i="0"><div class="dot-pip"></div><span class="dot-lbl">Start</span></div>
     <div class="sdot"    data-i="1"><div class="dot-pip"></div><span class="dot-lbl">Walnut</span></div>
@@ -427,7 +438,6 @@ body.dots-active .si { transform:scale(0.91); }
 const sc      = document.getElementById('sc');
 const dots    = document.querySelectorAll('.sdot');
 const logo    = document.getElementById('logo');
-const ctabtn  = document.getElementById('ctabtn');
 const sdotsEl = document.getElementById('sdots');
 const DARK    = new Set([4, 5]);
 const N       = 6;
@@ -441,7 +451,6 @@ function updateUI() {
   const i = currentIdx(), dark = DARK.has(i);
   dots.forEach((d, j) => d.classList.toggle('on', j === i));
   logo.classList.toggle('inv', dark);
-  ctabtn.classList.toggle('inv', dark);
   sdotsEl.classList.toggle('inv', dark);
 }
 
