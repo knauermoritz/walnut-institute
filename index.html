@@ -337,9 +337,7 @@ body.dots-active .si { transform:scale(0.91); }
     <div class="hero-r">
       <div class="ipad">
         <div class="ipad-s">
-          <video autoplay muted loop playsinline webkit-playsinline id="herovid">
-            <source src="demo-cropped.mp4" type="video/mp4">
-          </video>
+          <video src="demo-cropped.mp4" autoplay muted loop playsinline webkit-playsinline x5-playsinline id="herovid"></video>
         </div>
       </div>
     </div>
@@ -466,12 +464,16 @@ sdotsEl.addEventListener('mouseleave', () => document.body.classList.remove('dot
 
 updateUI();
 
-// Video autoplay fallback for mobile
+// Video autoplay — iOS requires programmatic play after setting attributes
 const vid = document.getElementById('herovid');
 if (vid) {
-  vid.play().catch(() => {
-    document.addEventListener('touchstart', () => vid.play(), { once: true });
-  });
+  vid.muted = true;
+  vid.setAttribute('playsinline', '');
+  vid.setAttribute('webkit-playsinline', '');
+  const tryPlay = () => vid.play().catch(() => {});
+  tryPlay();
+  document.addEventListener('touchstart', tryPlay, { once: true });
+  document.addEventListener('scroll', tryPlay, { once: true });
 }
 
 // Custom cursor
