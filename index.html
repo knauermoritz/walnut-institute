@@ -470,9 +470,7 @@ updateUI();
 // Intro zoom (desktop only)
 if (window.innerWidth > 768) {
   document.body.classList.add('page-intro');
-  requestAnimationFrame(() => requestAnimationFrame(() => {
-    document.body.classList.remove('page-intro');
-  }));
+  setTimeout(() => document.body.classList.remove('page-intro'), 80);
 }
 
 // Video autoplay — iOS requires programmatic play after setting attributes
