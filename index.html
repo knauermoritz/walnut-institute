@@ -71,6 +71,7 @@ html, body {
   transform-origin:center center;
 }
 body.dots-active .si { transform:scale(0.91); }
+body.page-intro .si { transform:scale(0.91); }
 
 /* Split backgrounds */
 .slide-hero           { background: linear-gradient(to right, var(--bg) 50%, var(--bg2) 50%); }
@@ -465,6 +466,14 @@ sdotsEl.addEventListener('mouseenter', () => document.body.classList.add('dots-a
 sdotsEl.addEventListener('mouseleave', () => document.body.classList.remove('dots-active'));
 
 updateUI();
+
+// Intro zoom (desktop only)
+if (window.innerWidth > 768) {
+  document.body.classList.add('page-intro');
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    document.body.classList.remove('page-intro');
+  }));
+}
 
 // Video autoplay — iOS requires programmatic play after setting attributes
 const vid = document.getElementById('herovid');
