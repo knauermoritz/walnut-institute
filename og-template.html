@@ -44,39 +44,19 @@ body {
 
 .right {
   flex: 1;
-  position: relative;
   height: 100%;
-  overflow: hidden;
-}
-
-.right::before {
-  content: '';
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 160px;
-  background: linear-gradient(to right, #0A0A0A, transparent);
-  z-index: 2;
-}
-
-.right::after {
-  content: '';
-  position: absolute;
-  inset: 0 0 0 auto;
-  width: 60px;
-  background: linear-gradient(to left, #0A0A0A, transparent);
-  z-index: 2;
+  display: flex;
+  align-items: center;
+  padding: 36px 36px 36px 0;
 }
 
 .screenshot {
-  position: absolute;
-  top: 28px;
-  left: 0;
   width: 100%;
-  height: calc(100% - 28px);
+  height: 100%;
   object-fit: cover;
   object-position: top left;
-  border-radius: 18px 0 0 0;
-  box-shadow: -20px 0 80px rgba(0,0,0,0.6);
+  border-radius: 20px;
+  box-shadow: 0 8px 48px rgba(0,0,0,0.5);
 }
 </style>
 </head>
