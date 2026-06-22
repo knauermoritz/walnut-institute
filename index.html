@@ -77,6 +77,8 @@ body.dots-active .si { transform:scale(0.91); }
 
 /* Split backgrounds */
 .slide-hero           { background: linear-gradient(to right, var(--bg) 50%, var(--bg2) 50%); }
+.hero-scroll-hint { display:none; position:absolute; bottom:22px; left:50%; transform:translateX(-50%); color:rgba(0,0,0,0.2); }
+@keyframes hint-bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(5px)} }
 .feat-split:not(.flip){ background: linear-gradient(to right, var(--bg) 50%, var(--bg2) 50%); }
 .feat-split.flip      { background: linear-gradient(to right, var(--bg2) 50%, var(--bg) 50%); }
 
@@ -306,6 +308,7 @@ body.dots-active .si { transform:scale(0.91); }
   .vort-list span { display:block; }
   .vort-h { font-size:clamp(28px,8vw,40px); }
 
+  .hero-scroll-hint { display:flex; animation:hint-bounce 1.8s ease-in-out infinite; }
   .slide-team-mobile { display:block; }
   .slide-team-mobile .si { flex-direction:column; justify-content:center; padding:80px 28px 60px; }
   .slide-vision .si { display:flex; flex-direction:column; padding:80px 28px 60px; gap:16px; }
@@ -364,6 +367,11 @@ body.dots-active .si { transform:scale(0.91); }
         </div>
       </div>
     </div>
+  </div>
+  <div class="hero-scroll-hint" aria-hidden="true">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <path d="M4 7l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
   </div>
 </section>
 
