@@ -1,97 +1,61 @@
 #!/usr/bin/env python3
 from PIL import Image, ImageDraw, ImageFont
-import math, os
+import os
 
-W, H = 1200, 630
-BG   = (20, 20, 20)       # near-black background
-BLUE = (20, 0, 255)        # brand blue
+DIR = os.path.dirname(os.path.abspath(__file__))
 
-out = Image.new("RGB", (W, H), BG)
+W, H   = 1200, 630
+BG     = (10, 10, 10)
+WHITE  = (255, 255, 255)
+MUTED  = (120, 120, 120)
+
+out  = Image.new("RGB", (W, H), BG)
 draw = ImageDraw.Draw(out)
 
-# ── subtle blue gradient stripe on left ──────────────────────────────────────
-for x in range(480):
-    alpha = max(0, 0.18 - x / 480 * 0.18)
-    r = int(BG[0] + (BLUE[0] - BG[0]) * alpha)
-    g = int(BG[1] + (BLUE[1] - BG[1]) * alpha)
-    b = int(BG[2] + (BLUE[2] - BG[2]) * alpha)
-    draw.line([(x, 0), (x, H)], fill=(r, g, b))
+# ── logo ─────────────────────────────────────────────────────────────────────
+LOGO_SIZE = 100
+logo = Image.open(os.path.join(DIR, "favicon.png")).convert("RGBA")
+logo = logo.resize((LOGO_SIZE, LOGO_SIZE), Image.LANCZOS)
 
-# ── app screenshot (right side, with rounded corners + shadow) ───────────────
-ss = Image.open(os.path.join(os.path.dirname(__file__), "ss-walnut.png")).convert("RGBA")
-ss_h = int(H * 0.88)
-ss_w = int(ss.width * ss_h / ss.height)
-ss   = ss.resize((ss_w, ss_h), Image.LANCZOS)
+logo_x = (W - LOGO_SIZE) // 2
+logo_y = 178
 
-# shadow
-shadow = Image.new("RGBA", out.size, (0, 0, 0, 0))
-sd = ImageDraw.Draw(shadow)
-sx = W - ss_w - 48
-sy = (H - ss_h) // 2
-for i in range(24, 0, -1):
-    sd.rounded_rectangle([sx-i, sy-i//2, sx+ss_w+i, sy+ss_h+i//2],
-                         radius=28, fill=(0,0,0, int(120*i/24)))
-out.paste(Image.alpha_composite(Image.new("RGBA", out.size, (0,0,0,0)), shadow).convert("RGB"),
-          mask=shadow.split()[3])
+# composite logo over bg colour to avoid white fringe
+bg_patch = Image.new("RGBA", (LOGO_SIZE, LOGO_SIZE), BG + (255,))
+bg_patch.alpha_composite(logo)
+out.paste(bg_patch.convert("RGB"), (logo_x, logo_y))
 
-# paste screenshot
-mask = Image.new("L", ss.size, 0)
-ImageDraw.Draw(mask).rounded_rectangle([0, 0, ss_w-1, ss_h-1], radius=22, fill=255)
-out.paste(ss, (sx, sy), mask)
+# ── fonts ─────────────────────────────────────────────────────────────────────
+def load_font(size, idx=0):
+    for path in ["/System/Library/Fonts/HelveticaNeue.ttc",
+                 "/System/Library/Fonts/Helvetica.ttc"]:
+        try:
+            return ImageFont.truetype(path, size, index=idx)
+        except:
+            pass
+    return ImageFont.load_default()
 
-# ── walnut logo (SVG rendered as circles/paths via pillow draw) ──────────────
-lx, ly, ls = 64, 56, 52   # logo x, y, size
-r = ls // 2
+# index 1 = Bold, index 7 = Light
+font_name = load_font(80, idx=1)
+font_tag  = load_font(26, idx=7)
 
-def rounded_rect(d, x, y, w, h, rx, fill):
-    d.rounded_rectangle([x, y, x+w, y+h], radius=rx, fill=fill)
+# ── "Walnut" ──────────────────────────────────────────────────────────────────
+name_text = "Walnut"
+bbox = draw.textbbox((0, 0), name_text, font=font_name)
+name_w = bbox[2] - bbox[0]
+name_x = (W - name_w) // 2
+name_y = logo_y + LOGO_SIZE + 28
+draw.text((name_x, name_y), name_text, font=font_name, fill=WHITE)
 
-# blue rounded square background
-rounded_rect(draw, lx, ly, ls, ls, rx=12, fill=BLUE)
+# ── tagline ───────────────────────────────────────────────────────────────────
+tag_text = "Schulen digitalisieren"
+bbox2 = draw.textbbox((0, 0), tag_text, font=font_tag)
+tag_w  = bbox2[2] - bbox2[0]
+tag_x  = (W - tag_w) // 2
+tag_y  = name_y + (bbox[3] - bbox[1]) + 16
+draw.text((tag_x, tag_y), tag_text, font=font_tag, fill=MUTED)
 
-# two white arc shapes (walnut icon)
-draw2 = ImageDraw.Draw(out)
-# left arc (D-shape facing right)
-lc = (lx + ls*0.34, ly + ls*0.5)   # center of left circle
-draw2.ellipse([lx + ls*0.04, ly + ls*0.09,
-               lx + ls*0.64, ly + ls*0.91], fill="white")
-# cut out center to make arc
-draw2.rounded_rectangle([lx + ls*0.34, ly + ls*0.09,
-                          lx + ls*0.64, ly + ls*0.91],
-                         radius=2, fill=BLUE)
-# right arc (D-shape facing left)
-draw2.ellipse([lx + ls*0.36, ly + ls*0.09,
-               lx + ls*0.96, ly + ls*0.91], fill="white")
-draw2.rounded_rectangle([lx + ls*0.36, ly + ls*0.09,
-                          lx + ls*0.66, ly + ls*0.91],
-                         radius=2, fill=BLUE)
-
-# ── text ─────────────────────────────────────────────────────────────────────
-try:
-    font_name  = ImageFont.truetype("/System/Library/Fonts/HelveticaNeue.ttc", 64)
-    font_tag   = ImageFont.truetype("/System/Library/Fonts/HelveticaNeue.ttc", 22)
-    font_sub   = ImageFont.truetype("/System/Library/Fonts/HelveticaNeue.ttc", 20)
-except:
-    font_name  = ImageFont.load_default()
-    font_tag   = font_name
-    font_sub   = font_name
-
-# "Walnut"
-draw.text((lx, ly + ls + 28), "Walnut", font=font_name, fill="white")
-
-# tagline
-draw.text((lx, ly + ls + 28 + 76), "Schule. Digitalisieren.", font=font_tag,
-          fill=(255, 255, 255, 160))
-
-# sub
-draw.text((lx, ly + ls + 28 + 76 + 36),
-          "Aufgaben · Noten · Korrekturen — alles auf einem Gerät.",
-          font=font_sub, fill=(160, 160, 160))
-
-# thin blue accent line under logo
-draw.rectangle([lx, ly + ls + 18, lx + 32, ly + ls + 20], fill=BLUE)
-
-# ── save ─────────────────────────────────────────────────────────────────────
-out_path = os.path.join(os.path.dirname(__file__), "og-image.png")
+# ── save ──────────────────────────────────────────────────────────────────────
+out_path = os.path.join(DIR, "og-image.png")
 out.save(out_path, "PNG", optimize=True)
 print(f"Saved → {out_path}  ({W}×{H})")
