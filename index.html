@@ -311,7 +311,8 @@ body.dots-active .si { transform:scale(0.91); }
   .slide-vision .si { display:flex; flex-direction:column; padding:80px 28px 60px; gap:16px; }
   .vision-content { padding:0; }
   .vision-inner { border-right:none; padding-right:0; }
-  .vision-team { display:none; }
+  .slide-vision:not(.slide-team-mobile) .vision-team { display:none; }
+  .slide-team-mobile .vision-team { display:flex; flex-direction:column; gap:44px; }
   .vision-text { gap:10px; }
   .vision-text p { font-size:11px; line-height:1.6; }
   .vision-sig { margin-top:4px; }
