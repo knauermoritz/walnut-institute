@@ -154,6 +154,7 @@ body.dots-active .si { transform:scale(0.91); }
 .vort-list span { font-weight:300; color:var(--muted); }
 
 /* TEAM */
+.slide-team-mobile { display:none; }
 .slide-team { background:var(--bg2); }
 .slide-team .si {
   display:grid; grid-template-columns:1fr 1fr;
@@ -305,10 +306,17 @@ body.dots-active .si { transform:scale(0.91); }
   .vort-list span { display:block; }
   .vort-h { font-size:clamp(28px,8vw,40px); }
 
-  .slide-vision .si { padding:80px 28px 60px; gap:16px; }
+  .slide-team-mobile { display:block; }
+  .slide-team-mobile .si { flex-direction:column; justify-content:center; padding:80px 28px 60px; }
+  .slide-vision .si { display:flex; flex-direction:column; padding:80px 28px 60px; gap:16px; }
+  .vision-content { padding:0; }
+  .vision-inner { border-right:none; padding-right:0; }
+  .vision-team { display:none; }
   .vision-text { gap:10px; }
   .vision-text p { font-size:11px; line-height:1.6; }
   .vision-sig { margin-top:4px; }
+  .vision-member-name { font-size:22px; }
+  .vision-member-bio { font-size:12px; }
 
   .slide-contact .si { padding:0 28px; }
   .contact-h { font-size:clamp(48px,15vw,100px); }
@@ -410,7 +418,28 @@ body.dots-active .si { transform:scale(0.91); }
   </div>
 </section>
 
-<!-- SLIDE 4: VISION + TEAM -->
+<!-- SLIDE 4 MOBILE ONLY: TEAM -->
+<section class="slide slide-vision slide-team-mobile slide-sep">
+  <div class="si">
+    <div class="vision-team">
+      <p class="vision-lbl">Team</p>
+      <div class="vision-member">
+        <div class="vision-member-avatar"></div>
+        <p class="vision-member-name">Moritz Knauer</p>
+        <p class="vision-member-role">Gründer &amp; Entwickler</p>
+        <p class="vision-member-bio">17 Jahre alt, 11. Klasse, Hessen. Gründer und Entwickler von Walnut.</p>
+      </div>
+      <div class="vision-member">
+        <div class="vision-member-avatar"></div>
+        <p class="vision-member-name">Tom Knauer</p>
+        <p class="vision-member-role">[Rolle]</p>
+        <p class="vision-member-bio">Platzhaltertext für Tom.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 4 DESKTOP / SLIDE 5 MOBILE: VISION + TEAM -->
 <section class="slide slide-vision slide-sep">
   <div class="si">
     <div class="vision-content">
