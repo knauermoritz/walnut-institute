@@ -241,7 +241,8 @@ body.dots-active .si { transform:scale(0.91); }
   transition:transform 0.25s ease, opacity 0.25s ease, background 0.2s, border-width 0.2s;
 }
 .sdot.on .dot-pip { background:var(--ink); }
-.sdots:hover .dot-pip { border-width:1.5px; }
+.sdots:hover .dot-pip { border-width:1.5px; background:var(--ink); }
+.sdots.inv:hover .dot-pip { background:#fff; }
 .dot-lbl {
   font-size:10px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase;
   white-space:nowrap; color:var(--ink);
