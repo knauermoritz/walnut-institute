@@ -182,7 +182,8 @@ body.dots-active .si { transform:scale(0.91); }
 /* VISION */
 .slide-vision { background:var(--ink); }
 .slide-vision .si { display:grid; grid-template-columns:1fr 0.6fr; height:100%; }
-.vision-content { display:flex; flex-direction:column; justify-content:center; padding:0 72px 0 84px; gap:32px; border-right:1px solid rgba(255,255,255,0.08); }
+.vision-content { display:flex; flex-direction:column; justify-content:center; padding:0 0 0 84px; }
+.vision-inner { display:flex; flex-direction:column; gap:32px; padding-right:72px; border-right:1px solid rgba(255,255,255,0.12); }
 .vision-lbl { font-size:10px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.3); }
 .vision-text { display:flex; flex-direction:column; gap:20px; }
 .vision-text p { font-size:14px; font-weight:300; line-height:1.85; color:rgba(255,255,255,0.72); }
@@ -413,11 +414,13 @@ body.dots-active .si { transform:scale(0.91); }
 <section class="slide slide-vision slide-sep">
   <div class="si">
     <div class="vision-content">
+      <div class="vision-inner">
       <p class="vision-lbl">Vision</p>
       <div class="vision-text">
         <p>Schule soll Schülerinnen und Schüler auf das Leben vorbereiten. Digitale Kompetenz wird für jeden Beruf wichtiger — doch viele Schulen reagieren darauf, indem sie digitale Geräte aus dem Unterricht verbannen. Dabei ist das Gerät nicht das Problem, sondern das fehlende System dahinter.</p>
         <p>Jeder nutzt eigene Apps, eigene Geräte, ohne gemeinsamen Rahmen. Das bringt neue Probleme: unkontrollierter KI-Einsatz, Ablenkung durch Social Media und Spiele. Genau deshalb haben wir Walnut gebaut: eine einheitliche Software, die Lehrkräfte und Schüler gemeinsam nutzen, einfach, klar und ohne Ablenkung. Lehrkräfte werden nicht ersetzt, sondern entlastet.</p>
         <p>Unsere Vision geht weiter. Wir möchten langfristig einen Algorithmus schaffen, der versteht, welche Inhalte und Aufgaben für jeden Schüler gerade am wirkungsvollsten sind. Jede Schülerin und jeder Schüler erhält ein individuell angepasstes Curriculum, maßgeschneidert auf eigene Stärken, Schwächen und Lerngeschwindigkeit.</p>
+      </div>
       </div>
     </div>
     <div class="vision-team">
