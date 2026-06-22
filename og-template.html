@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  width:1200px; height:630px; overflow:hidden;
+  background:#0A0A0A;
+  font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+  display:flex; align-items:center;
+}
+
+.left {
+  flex: 0 0 500px;
+  padding: 0 76px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.logo {
+  width: 72px; height: 72px;
+  margin-bottom: 28px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.name {
+  font-size: 76px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.045em;
+  line-height: 0.9;
+  margin-bottom: 18px;
+}
+
+.tagline {
+  font-size: 21px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.42);
+  letter-spacing: -0.01em;
+}
+
+.right {
+  flex: 1;
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
+.right::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 160px;
+  background: linear-gradient(to right, #0A0A0A, transparent);
+  z-index: 2;
+}
+
+.right::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: 60px;
+  background: linear-gradient(to left, #0A0A0A, transparent);
+  z-index: 2;
+}
+
+.screenshot {
+  position: absolute;
+  top: 28px;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 28px);
+  object-fit: cover;
+  object-position: top left;
+  border-radius: 18px 0 0 0;
+  box-shadow: -20px 0 80px rgba(0,0,0,0.6);
+}
+</style>
+</head>
+<body>
+
+<div class="left">
+  <svg class="logo" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+    <rect width="160" height="160" rx="36" fill="#1400FF"/>
+    <path fill="white" d="M54.350,32.481 A54,54 0 0 0 54.350,127.519 A14,14 0 0 0 75,115.199 L75,44.801 A14,14 0 0 0 54.350,32.481Z"/>
+    <path fill="white" d="M105.650,32.481 A14,14 0 0 0 85,44.801 L85,115.199 A14,14 0 0 0 105.650,127.519 A54,54 0 0 0 105.650,32.481Z"/>
+  </svg>
+  <div class="name">Walnut</div>
+  <div class="tagline">Schulen digitalisieren</div>
+</div>
+
+<div class="right">
+  <img class="screenshot" src="ss-walnut.png">
+</div>
+
+</body>
+</html>
