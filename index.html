@@ -181,11 +181,18 @@ body.dots-active .si { transform:scale(0.91); }
 
 /* VISION */
 .slide-vision { background:var(--ink); }
-.slide-vision .si { flex-direction:column; justify-content:center; padding:0 84px; gap:40px; }
+.slide-vision .si { display:grid; grid-template-columns:1fr 0.6fr; height:100%; }
+.vision-content { display:flex; flex-direction:column; justify-content:center; padding:0 72px 0 84px; gap:32px; border-right:1px solid rgba(255,255,255,0.08); }
 .vision-lbl { font-size:10px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.3); }
-.vision-text { max-width:700px; display:flex; flex-direction:column; gap:22px; }
-.vision-text p { font-size:15px; font-weight:300; line-height:1.8; color:rgba(255,255,255,0.78); }
+.vision-text { display:flex; flex-direction:column; gap:20px; }
+.vision-text p { font-size:14px; font-weight:300; line-height:1.85; color:rgba(255,255,255,0.72); }
 .vision-sig { font-size:15px; font-weight:300; line-height:1.8; color:rgba(255,255,255,0.78); margin-top:0; }
+.vision-team { display:flex; flex-direction:column; justify-content:center; padding:0 56px; gap:44px; }
+.vision-member { display:flex; flex-direction:column; gap:0; }
+.vision-member-avatar { width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.1); margin-bottom:16px; }
+.vision-member-name { font-size:clamp(18px,1.8vw,24px); font-weight:700; color:#fff; letter-spacing:-0.025em; line-height:1; margin-bottom:8px; }
+.vision-member-role { font-size:10px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--blue); margin-bottom:14px; }
+.vision-member-bio { font-size:13px; font-weight:300; color:rgba(255,255,255,0.45); line-height:1.75; max-width:260px; }
 
 /* KONTAKT */
 .slide-contact { background:var(--blue); }
@@ -326,9 +333,8 @@ body.dots-active .si { transform:scale(0.91); }
     <div class="sdot"    data-i="1"><div class="dot-pip"></div><span class="dot-lbl">Walnut</span></div>
     <div class="sdot"    data-i="2"><div class="dot-pip"></div><span class="dot-lbl">Compass</span></div>
     <div class="sdot"    data-i="3"><div class="dot-pip"></div><span class="dot-lbl">Vorteile</span></div>
-    <div class="sdot"    data-i="4"><div class="dot-pip"></div><span class="dot-lbl">Team</span></div>
-    <div class="sdot"    data-i="5"><div class="dot-pip"></div><span class="dot-lbl">Vision</span></div>
-    <div class="sdot"    data-i="6"><div class="dot-pip"></div><span class="dot-lbl">Kontakt</span></div>
+    <div class="sdot"    data-i="4"><div class="dot-pip"></div><span class="dot-lbl">Vision</span></div>
+    <div class="sdot"    data-i="5"><div class="dot-pip"></div><span class="dot-lbl">Kontakt</span></div>
   </nav>
 </div>
 
@@ -403,32 +409,30 @@ body.dots-active .si { transform:scale(0.91); }
   </div>
 </section>
 
-<!-- SLIDE 4: TEAM -->
-<section class="slide slide-team slide-sep">
-  <div class="si">
-    <div class="team-member">
-      <div class="team-avatar"></div>
-      <p class="team-name">Moritz Knauer</p>
-      <p class="team-role">Gründer &amp; Entwickler</p>
-      <p class="team-bio">17, 11. Klasse, Hessen. Gründer und Entwickler von Walnut.</p>
-    </div>
-    <div class="team-member">
-      <div class="team-avatar"></div>
-      <p class="team-name">Tom Knauer</p>
-      <p class="team-role">[Rolle]</p>
-      <p class="team-bio">Platzhaltertext. Hier steht eine kurze Beschreibung zu Tom — Hintergrund und Rolle im Projekt.</p>
-    </div>
-  </div>
-</section>
-
-<!-- SLIDE 5: VISION -->
+<!-- SLIDE 4: VISION + TEAM -->
 <section class="slide slide-vision slide-sep">
   <div class="si">
-    <p class="vision-lbl">Vision</p>
-    <div class="vision-text">
-      <p>Schule soll Schülerinnen und Schüler auf das Leben vorbereiten. Digitale Kompetenz wird für jeden Beruf wichtiger — doch viele Schulen reagieren darauf, indem sie digitale Geräte aus dem Unterricht verbannen. Dabei ist das Gerät nicht das Problem, sondern das fehlende System dahinter.</p>
-      <p>Jeder nutzt eigene Apps, eigene Geräte, ohne gemeinsamen Rahmen. Das bringt neue Probleme: unkontrollierter KI-Einsatz, Ablenkung durch Social Media und Spiele. Genau deshalb haben wir Walnut gebaut: eine einheitliche Software, die Lehrkräfte und Schüler gemeinsam nutzen, einfach, klar und ohne Ablenkung. Lehrkräfte werden nicht ersetzt, sondern entlastet.</p>
-      <p>Unsere Vision geht weiter. Wir möchten langfristig einen Algorithmus schaffen, der versteht, welche Inhalte und Aufgaben für jeden Schüler gerade am wirkungsvollsten sind. Jede Schülerin und jeder Schüler erhält ein individuell angepasstes Curriculum, maßgeschneidert auf eigene Stärken, Schwächen und Lerngeschwindigkeit.</p>
+    <div class="vision-content">
+      <p class="vision-lbl">Vision</p>
+      <div class="vision-text">
+        <p>Schule soll Schülerinnen und Schüler auf das Leben vorbereiten. Digitale Kompetenz wird für jeden Beruf wichtiger — doch viele Schulen reagieren darauf, indem sie digitale Geräte aus dem Unterricht verbannen. Dabei ist das Gerät nicht das Problem, sondern das fehlende System dahinter.</p>
+        <p>Jeder nutzt eigene Apps, eigene Geräte, ohne gemeinsamen Rahmen. Das bringt neue Probleme: unkontrollierter KI-Einsatz, Ablenkung durch Social Media und Spiele. Genau deshalb haben wir Walnut gebaut: eine einheitliche Software, die Lehrkräfte und Schüler gemeinsam nutzen, einfach, klar und ohne Ablenkung. Lehrkräfte werden nicht ersetzt, sondern entlastet.</p>
+        <p>Unsere Vision geht weiter. Wir möchten langfristig einen Algorithmus schaffen, der versteht, welche Inhalte und Aufgaben für jeden Schüler gerade am wirkungsvollsten sind. Jede Schülerin und jeder Schüler erhält ein individuell angepasstes Curriculum, maßgeschneidert auf eigene Stärken, Schwächen und Lerngeschwindigkeit.</p>
+      </div>
+    </div>
+    <div class="vision-team">
+      <div class="vision-member">
+        <div class="vision-member-avatar"></div>
+        <p class="vision-member-name">Moritz Knauer</p>
+        <p class="vision-member-role">Gründer &amp; Entwickler</p>
+        <p class="vision-member-bio">17, 11. Klasse, Hessen. Gründer und Entwickler von Walnut.</p>
+      </div>
+      <div class="vision-member">
+        <div class="vision-member-avatar"></div>
+        <p class="vision-member-name">Tom Knauer</p>
+        <p class="vision-member-role">[Rolle]</p>
+        <p class="vision-member-bio">Platzhaltertext für Tom.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -451,8 +455,8 @@ const sc      = document.getElementById('sc');
 const dots    = document.querySelectorAll('.sdot');
 const logo    = document.getElementById('logo');
 const sdotsEl = document.getElementById('sdots');
-const DARK    = new Set([5, 6]);
-const N       = 7;
+const DARK    = new Set([4, 5]);
+const N       = 6;
 
 let scrollEndTimer;
 
