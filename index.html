@@ -200,12 +200,13 @@ body.dots-active .si { transform:scale(0.91); }
 .vision-text { display:flex; flex-direction:column; gap:20px; }
 .vision-text p { font-size:14px; font-weight:300; line-height:1.85; color:rgba(255,255,255,0.72); }
 .vision-sig { font-size:15px; font-weight:300; line-height:1.8; color:rgba(255,255,255,0.78); margin-top:0; }
-.vision-team { display:flex; flex-direction:column; justify-content:center; padding:0 56px; gap:44px; }
+.vision-team { display:flex; flex-direction:column; justify-content:center; padding:0 56px; gap:28px; }
+.vision-team-photo { width:100%; aspect-ratio:3/2; object-fit:cover; object-position:center 18%; border-radius:14px; margin-bottom:8px; }
+.vision-members { display:flex; flex-direction:column; gap:24px; }
 .vision-member { display:flex; flex-direction:column; gap:0; }
-.vision-member-avatar { width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.1); margin-bottom:16px; }
-.vision-member-name { font-size:clamp(18px,1.8vw,24px); font-weight:700; color:#fff; letter-spacing:-0.025em; line-height:1; margin-bottom:8px; }
-.vision-member-role { font-size:10px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--blue); margin-bottom:14px; }
-.vision-member-bio { font-size:13px; font-weight:300; color:rgba(255,255,255,0.45); line-height:1.75; max-width:260px; }
+.vision-member-name { font-size:clamp(16px,1.6vw,20px); font-weight:700; color:#fff; letter-spacing:-0.025em; line-height:1; margin-bottom:6px; }
+.vision-member-role { font-size:10px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--blue); margin-bottom:10px; }
+.vision-member-bio { font-size:12px; font-weight:300; color:rgba(255,255,255,0.45); line-height:1.7; max-width:260px; }
 
 /* KONTAKT */
 .slide-contact { background:var(--blue); }
@@ -324,7 +325,9 @@ body.dots-active .si { transform:scale(0.91); }
   .vision-content { padding:0; }
   .vision-inner { border-right:none; padding-right:0; }
   .slide-vision:not(.slide-team-mobile) .vision-team { display:none; }
-  .slide-team-mobile .vision-team { display:flex; flex-direction:column; gap:44px; }
+  .slide-team-mobile .vision-team { display:flex; flex-direction:column; gap:20px; }
+  .vision-team-photo { border-radius:12px; }
+  .vision-members { gap:20px; }
   .vision-text { gap:10px; }
   .vision-text p { font-size:13px; line-height:1.7; }
   .vision-sig { margin-top:4px; }
@@ -441,17 +444,18 @@ body.dots-active .si { transform:scale(0.91); }
   <div class="si">
     <div class="vision-team">
       <p class="vision-lbl">Team</p>
-      <div class="vision-member">
-        <div class="vision-member-avatar"></div>
-        <p class="vision-member-name">Moritz Knauer</p>
-        <p class="vision-member-role">Gründer &amp; Entwickler</p>
-        <p class="vision-member-bio">17 Jahre alt, 11. Klasse, Hessen. Gründer und Entwickler von Walnut.</p>
-      </div>
-      <div class="vision-member">
-        <div class="vision-member-avatar"></div>
-        <p class="vision-member-name">Tom Knauer</p>
-        <p class="vision-member-role">[Rolle]</p>
-        <p class="vision-member-bio">19 Jahre alt, gerade mit dem Abitur fertig. Mit Walnut will ich Schule zukunftsfest machen, da Bildung gerade im Zeitalter von KI der Schlüssel zu nachhaltigem Erfolg bleibt.</p>
+      <img class="vision-team-photo" src="team.jpg" alt="Moritz und Tom Knauer">
+      <div class="vision-members">
+        <div class="vision-member">
+          <p class="vision-member-name">Moritz Knauer</p>
+          <p class="vision-member-role">Mitgründer &amp; Entwickler</p>
+          <p class="vision-member-bio">17 Jahre alt, 11. Klasse, Hessen. Gründer und Entwickler von Walnut.</p>
+        </div>
+        <div class="vision-member">
+          <p class="vision-member-name">Tom Knauer</p>
+          <p class="vision-member-role">Mitgründer</p>
+          <p class="vision-member-bio">19 Jahre alt, gerade mit dem Abitur fertig. Mit Walnut will ich Schule zukunftsfest machen, da Bildung gerade im Zeitalter von KI der Schlüssel zu nachhaltigem Erfolg bleibt.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -472,17 +476,18 @@ body.dots-active .si { transform:scale(0.91); }
     </div>
     <div class="vision-team">
       <p class="vision-lbl">Team</p>
-      <div class="vision-member">
-        <div class="vision-member-avatar"></div>
-        <p class="vision-member-name">Moritz Knauer</p>
-        <p class="vision-member-role">Gründer &amp; Entwickler</p>
-        <p class="vision-member-bio">17 Jahre alt, 11. Klasse, Hessen. Gründer und Entwickler von Walnut.</p>
-      </div>
-      <div class="vision-member">
-        <div class="vision-member-avatar"></div>
-        <p class="vision-member-name">Tom Knauer</p>
-        <p class="vision-member-role">[Rolle]</p>
-        <p class="vision-member-bio">19 Jahre alt, gerade mit dem Abitur fertig. Mit Walnut will ich Schule zukunftsfest machen, da Bildung gerade im Zeitalter von KI der Schlüssel zu nachhaltigem Erfolg bleibt.</p>
+      <img class="vision-team-photo" src="team.jpg" alt="Moritz und Tom Knauer">
+      <div class="vision-members">
+        <div class="vision-member">
+          <p class="vision-member-name">Moritz Knauer</p>
+          <p class="vision-member-role">Mitgründer &amp; Entwickler</p>
+          <p class="vision-member-bio">17 Jahre alt, 11. Klasse, Hessen. Gründer und Entwickler von Walnut.</p>
+        </div>
+        <div class="vision-member">
+          <p class="vision-member-name">Tom Knauer</p>
+          <p class="vision-member-role">Mitgründer</p>
+          <p class="vision-member-bio">19 Jahre alt, gerade mit dem Abitur fertig. Mit Walnut will ich Schule zukunftsfest machen, da Bildung gerade im Zeitalter von KI der Schlüssel zu nachhaltigem Erfolg bleibt.</p>
+        </div>
       </div>
     </div>
   </div>
